@@ -17,8 +17,7 @@ Project description goes here.
 
 <!-- Link to the repo owners' github profiles -->
 
-- [@10zinten](https://github.com/10zinten)
-- [@evanyerburgh](https://github.com/evanyerburgh)
+- [@kaldan007](https://github.com/kaldan007)
 
 ## Integrations
 
