@@ -73,6 +73,28 @@ output_directory.mkdir(parents=True, exist_ok=True)
 run_pipeline(input_directory, output_directory, threshold=0.7)
 ```
 
+## Implementation
+
+This project uses the **MinHash** algorithm to efficiently find duplicate and near-duplicate documents.
+
+### What is MinHash?
+
+MinHash is a technique for quickly estimating how similar two sets are. Instead of comparing the full content of two files, which can be very slow, MinHash creates a small, fixed-size "signature" for each document. The key idea is that if two documents are similar, their MinHash signatures will also be very similar.
+
+This allows us to estimate the **Jaccard Similarity** between two documents (the ratio of their common elements to their total unique elements) by only comparing their compact signatures.
+
+### How is it used in this pipeline?
+
+The deduplication process follows these steps:
+
+1.  **Shingling**: Each text file is read and broken down into a set of unique, overlapping character sequences called "shingles". For example, the text `"abcde"` with a shingle size of 3 would become `{"abc", "bcd", "cde"}`. This set of shingles represents the content of the document.
+
+2.  **MinHashing**: The set of shingles for each document is then hashed into a compact MinHash signature. This signature is a small, fixed-length vector of numbers that represents the original text.
+
+3.  **Locality Sensitive Hashing (LSH)**: To avoid the O(n²) problem of comparing every document to every other document, all MinHash signatures are indexed into an LSH data structure. LSH is a clever hashing technique that groups similar signatures together into the same "buckets". This means that to find potential duplicates for a document, we only need to look at other documents in the same bucket, which is extremely fast.
+
+4.  **Querying and Deduplication**: The pipeline iterates through each document, queries the LSH index to find its neighbors (potential duplicates), and then filters them out to produce a final list of unique files.
+
 ## Contributing
 
 If you'd like to help out, check out our [contributing guidelines](/CONTRIBUTING.md).
