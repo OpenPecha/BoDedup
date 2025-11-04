@@ -95,6 +95,10 @@ The deduplication process follows these steps:
 
 4.  **Querying and Deduplication**: The pipeline iterates through each document, queries the LSH index to find its neighbors (potential duplicates), and then filters them out to produce a final list of unique files.
 
+## Reference Information
+
+*   [MinHash Explained (YouTube)](https://www.youtube.com/watch?v=GRHsg0d5X8Y) - A video explaining the concepts behind the MinHash algorithm.
+
 ## Contributing
 
 If you'd like to help out, check out our [contributing guidelines](/CONTRIBUTING.md).
