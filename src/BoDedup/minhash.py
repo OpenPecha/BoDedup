@@ -6,10 +6,7 @@ import re
 
 
 def tibetan_tokenizer(text):
-    """
-    A tokenizer for Tibetan text that splits the text into syllables
-    using the tsek character (་) as a delimiter, and then creates shingles.
-    """
+    """A basic tokenizer for Tibetan text that returns a set of 3-shingles."""
     shingles = set()
     for i in range(len(text) - 2):
         shingles.add(text[i:i+3])

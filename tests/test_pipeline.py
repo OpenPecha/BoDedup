@@ -1,6 +1,6 @@
 import shutil
 from pathlib import Path
-from BoDedup.pipeline import run_pipeline
+from BoDedup.minhash import run_pipeline
 
 # Define the paths to the test data directories
 # Assumes the test is run from the root of the project
